@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+{% block text  %}
+<h1 style="text-align:left">Наши Контакты</h1>
+<br>
+<h6 style="text-align:left">г.Ульяновск
+<br>
+Засвияжский район
+<br>
+ул Красноармейская дом 4а
+<br>
+    телефон: 435636304636
+    </h6>
+{% endblock text %}
+<body style="text-align:right">
+<h1>Наши группы в социальных сетях</h1>
+<img style="align:right"
+  src="{% static 'images/swartc.jpg' %}"
+  alt="" />
+<br>
+ <h5 style="text-align:right">
+     <br>
+     <a href="https://githowto.com/ru/git_basics">Наша группа в VK</a>
+     <br>
+     <a href="https://githowto.com/ru/git_basics">Наш телеграмм-канал</a>
+ </h5>
+</body>
+{% endblock content %}
+
