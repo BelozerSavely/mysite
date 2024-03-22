@@ -3,22 +3,20 @@ from django.http import JsonResponse
 import json
 import datetime
 
-
 from .models import *
-from . utils import cookieCart, cartData, guestOrder
+from .utils import cookieCart, cartData, guestOrder
 
 
-def Store(request):
+def store(request):
     data = cartData(request)
     cartItems = data['cartItems']
-
-
 
     products = Product.objects.all()
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'store/store.html', context)
 
-def Cart(request):
+
+def cart(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -27,8 +25,8 @@ def Cart(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html', context)
 
-def Chekout(request):
 
+def chekout(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -37,6 +35,7 @@ def Chekout(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
 
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -44,7 +43,6 @@ def updateItem(request):
 
     print('action:', action)
     print('productId:', productId)
-
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
@@ -58,7 +56,6 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity - 1)
 
     orderItem.save()
-
 
     if orderItem.quantity <= 0:
         orderItem.delete()
@@ -74,21 +71,17 @@ def processOrder(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-
-
-
     else:
         customer, order = guestOrder(request, data)
 
     total = float(data['form']['total'].replace(',', '.'))
     order.transaction_id = transaction_id
 
-
     if total == order.get_cart_total:
         order.complete = True
     order.save()
 
-    if order.shipping == True:
+    if order.shipping is True:
         ShippingAddress.objects.create(
             customer=customer,
             order=order,
@@ -98,8 +91,21 @@ def processOrder(request):
             zipcode=data['shipping']['zipcode'],
         )
 
-
     return JsonResponse('paypal good', safe=False)
+
+
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'store/categories.html', {'categories': categories})
+
+
+def get_store_by_categories(request, category_id):
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    products = Product.objects.filter(category__id=category_id)
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/store.html', context)
 
 
 def contacts(request):
@@ -108,6 +114,3 @@ def contacts(request):
 
 def about(request):
     return render(request, 'store/about.html')
-
-
-
