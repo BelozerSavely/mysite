@@ -94,6 +94,20 @@ def processOrder(request):
     return JsonResponse('paypal good', safe=False)
 
 
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'store/categories.html', {'categories': categories})
+
+
+def get_store_by_categories(request, category_id):
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    products = Product.objects.filter(category__id=category_id)
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/store.html', context)
+
+
 def contacts(request):
     return render(request, 'store/contacts.html')
 
