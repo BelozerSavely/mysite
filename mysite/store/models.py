@@ -33,6 +33,16 @@ class Product(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    image = models.ImageField(null=True, blank=True)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+
+        return url
 
 
 class Order(models.Model):
