@@ -70,37 +70,40 @@
     </button>
 
 
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'store' %}">Главная<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'categories' %}">Категории<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'contacts' %}">Контакты<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'store' %}">Главная<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'about' %}">Информация о нас<span
+                        class="sr-only">(current)</span></a>
             </li>
         </ul>
-    </div>
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'contacts' %}">Контакты<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'about' %}">Информация о нас<span
-                            class="sr-only">(current)</span></a>
-                </li>
-            </ul>
 
-            <div class="form-inline my-2 my-lg-0">
-                <!--	     	<a href="#"class="btn btn-warning">Login</a>-->
+        <div class="form-inline my-2 my-lg-0">
+            <!--	     	<a href="#"class="btn btn-warning">Login</a>-->
 
-                <a href="{% url 'cart' %}">
-                    <img id="cart-icon" src="{% static 'images/cart.png' %}">
-                </a>
-                <p id="cart-total">{{ cartItems }}</p>
+            <a href="{% url 'cart' %}">
+                <img id="cart-icon" src="{% static 'images/cart.png' %}">
+            </a>
+            <p id="cart-total">{{ cartItems }}</p>
 
-            </div>
         </div>
     </div>
 </nav>
