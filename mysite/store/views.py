@@ -3,20 +3,18 @@ from django.http import JsonResponse
 import json
 import datetime
 
-
 from .models import *
-from . utils import cookieCart, cartData, guestOrder
+from .utils import cookieCart, cartData, guestOrder
 
 
 def Store(request):
     data = cartData(request)
     cartItems = data['cartItems']
 
-
-
     products = Product.objects.all()
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'store/store.html', context)
+
 
 def Cart(request):
     data = cartData(request)
@@ -27,8 +25,8 @@ def Cart(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html', context)
 
-def Chekout(request):
 
+def Chekout(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -37,6 +35,7 @@ def Chekout(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
 
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -44,7 +43,6 @@ def updateItem(request):
 
     print('action:', action)
     print('productId:', productId)
-
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
@@ -58,7 +56,6 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity - 1)
 
     orderItem.save()
-
 
     if orderItem.quantity <= 0:
         orderItem.delete()
@@ -83,7 +80,6 @@ def processOrder(request):
     total = float(data['form']['total'].replace(',', '.'))
     order.transaction_id = transaction_id
 
-
     if total == order.get_cart_total:
         order.complete = True
     order.save()
@@ -98,7 +94,6 @@ def processOrder(request):
             zipcode=data['shipping']['zipcode'],
         )
 
-
     return JsonResponse('paypal good', safe=False)
 
 
@@ -108,6 +103,3 @@ def contacts(request):
 
 def about(request):
     return render(request, 'store/about.html')
-
-
-
