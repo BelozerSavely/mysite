@@ -16,6 +16,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)  # SET_NULL временно
 
     def __str__(self):
         return self.name
@@ -28,6 +29,10 @@ class Product(models.Model):
             url = ''
 
         return url
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
 
 
 class Order(models.Model):
@@ -47,7 +52,6 @@ class Order(models.Model):
             if i.product.digital == False:
                 shipping = True
         return shipping
-
 
     @property
     def get_cart_total(self):
@@ -85,5 +89,3 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
-
-
