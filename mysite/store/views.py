@@ -7,7 +7,7 @@ from .models import *
 from .utils import cookieCart, cartData, guestOrder
 
 
-def Store(request):
+def store(request):
     data = cartData(request)
     cartItems = data['cartItems']
 
@@ -16,7 +16,7 @@ def Store(request):
     return render(request, 'store/store.html', context)
 
 
-def Cart(request):
+def cart(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -26,7 +26,7 @@ def Cart(request):
     return render(request, 'store/cart.html', context)
 
 
-def Chekout(request):
+def chekout(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -71,9 +71,6 @@ def processOrder(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-
-
-
     else:
         customer, order = guestOrder(request, data)
 
@@ -84,7 +81,7 @@ def processOrder(request):
         order.complete = True
     order.save()
 
-    if order.shipping == True:
+    if order.shipping is True:
         ShippingAddress.objects.create(
             customer=customer,
             order=order,
