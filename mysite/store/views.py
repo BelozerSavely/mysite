@@ -108,8 +108,8 @@ def get_store_by_categories(request, category_id):
     return render(request, 'store/store.html', context)
 
 
-def contacts(request):
-    return render(request, 'store/contacts.html')
+# def contacts(request):
+#     return render(request, 'store/contacts.html')
 
 
 def about(request):
