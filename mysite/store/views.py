@@ -108,15 +108,15 @@ def get_store_by_categories(request, category_id):
     return render(request, 'store/store.html', context)
 
 
-# def contacts(request):
-#     return render(request, 'store/contacts.html')
-
-
 def about(request):
     return render(request, 'store/about.html')
 
+
 def description_page(request, product_id):
-    item = Product.objects.filter(id=product_id)
-    return render(request, 'store/description_page.html', {'item': item})
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    item = Product.objects.get(id=product_id)
+    return render(request, 'store/description_page.html', {'item': item, 'cartItems': cartItems})
 
 

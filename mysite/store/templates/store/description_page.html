@@ -1,6 +1,15 @@
 {% extends 'store/main.html' %}
+
 {% block content %}
-
-{{item.description}}
-
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element product">
+                <img class="thumbnail" src="{{item.imageURL}}">
+                <h6>{{ item.description}}</h6>
+                <hr>
+                <a class="btn btn-outline-success" href="{% url 'store' %}">Назад</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
+
