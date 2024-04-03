@@ -114,3 +114,9 @@ def get_store_by_categories(request, category_id):
 
 def about(request):
     return render(request, 'store/about.html')
+
+def description_page(request, product_id):
+    item = Product.objects.filter(id=product_id)
+    return render(request, 'store/description_page.html', {'item': item})
+
+
