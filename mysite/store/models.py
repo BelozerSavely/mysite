@@ -17,6 +17,7 @@ class Product(models.Model):
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)  # SET_NULL временно
+    description = models.TextField(default='описание')
 
     def __str__(self):
         return self.name
