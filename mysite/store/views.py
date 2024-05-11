@@ -95,8 +95,11 @@ def processOrder(request):
 
 
 def category_list(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+
     categories = Category.objects.all()
-    return render(request, 'store/categories.html', {'categories': categories})
+    return render(request, 'store/categories.html', {'categories': categories, 'cartItems': cartItems})
 
 
 def get_store_by_categories(request, category_id):
@@ -109,7 +112,10 @@ def get_store_by_categories(request, category_id):
 
 
 def about(request):
-    return render(request, 'store/about.html')
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    return render(request, 'store/about.html', {'cartItems': cartItems})
 
 
 def description_page(request, product_id):

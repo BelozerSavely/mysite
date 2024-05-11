@@ -2,14 +2,15 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-12">
-            <div class="box-element product">
-                <img class="thumbnail" src="{{item.imageURL}}">
-                <h6>{{ item.description}}</h6>
-                <hr>
-                <a class="btn btn-outline-success" href="{% url 'store' %}">Назад</a>
-            </div>
+        <div align="center" class="col-lg-12">
+            <img src="{{item.imageURL}}" width="550px" height="350px">
         </div>
     </div>
+<br>
+<h5 style="text-align:center">Состав продукта</h5>
+ <p align="right" style="text-align:center">{{ item.description}}</p>
+<div style="text-align:center">
+<button data-product="{{item.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">В корзину</button>
+</div>
 {% endblock content %}
 
