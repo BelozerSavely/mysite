@@ -1,30 +1,21 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-{% block text  %}
-<h1 style="text-align:left">Наши Контакты</h1>
+<h1 style="text-align:center">Магазин кондитерских изделий - Сладкий островок</h1>
+<div align="center">
+<img
+  src="{% static 'images/cak.jpg' %}"
+  alt="" width="1100px" height="550px" />
+</div>
 <br>
-<h6 style="text-align:left">г.Ульяновск
+<div>
+    <h5 style="text-align:center">Магазин кондитерских изделий - сладкий островок - предоставляет различну палитру вкусов. Вы можете насладиться как вкусными тортами и пирожными с разными начинками, так и попробовать наш домашний шоколад!</h5>
+</div>
 <br>
-Засвияжский район
-<br>
-ул Красноармейская дом 4а
-<br>
-    телефон: 435636304636
-    </h6>
-{% endblock text %}
-<body>
-<h1>Наши группы в социальных сетях</h1>
-<img style="align:right"
-  src="{% static 'images/swartc.jpg' %}"
-  alt="" />
-<br>
- <h5>
-     <br>
-     <a href="https://githowto.com/ru/git_basics">Наша группа в VK</a>
-     <br>
-     <a href="https://githowto.com/ru/git_basics">Наш телеграмм-канал</a>
- </h5>
-</body>
-{% endblock content %}
+<div align="center">
+ <a class="btn btn-outline-dark" href="{% url 'store' %}">Все товары</a>
+    <a class="btn btn-outline-dark" href="{% url 'categories' %}">Категории</a>
+    <a class="btn btn-outline-dark" href="{% url 'about' %}">О нас</a>
+</div>
+{% endblock content%}
 

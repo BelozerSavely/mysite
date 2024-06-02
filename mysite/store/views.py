@@ -125,4 +125,8 @@ def description_page(request, product_id):
     item = Product.objects.get(id=product_id)
     return render(request, 'store/description_page.html', {'item': item, 'cartItems': cartItems})
 
+def contacts(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
 
+    return render(request, 'store/contacts.html', {'cartItems': cartItems})

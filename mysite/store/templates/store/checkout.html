@@ -65,7 +65,7 @@
 				</div>
 				{% endfor %}
 				<h5>Товары: {{order.get_cart_items}}</h5>
-				<h5>Цена за все товары: {{order.get_cart_total|floatformat:2}}</h5>
+				<h5>Цена за все товары: {{order.get_cart_total|floatformat:2}}₽</h5>
 
 		</div>
 	</div>
@@ -150,7 +150,9 @@
 		.then((response) => response.json())
 		.then((data) => {
 		  	   console.log('Success', data);
-		  	   alert('Пожалуйста переведите деньги сюда 2258 3453 5325 5435');
+		  	   alert('Мы отправим Вам сообщение на почту о вашем товаре, Вам нужно будет подтвердить заказ.');
+
+
 
 		  	   cart = {}
 		  	   document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
